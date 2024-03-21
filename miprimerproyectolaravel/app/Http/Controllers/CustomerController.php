@@ -20,9 +20,7 @@ class CustomerController extends Controller
         $this->customerService = $customerService;
     }   
 
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index(): JsonResponse
     {
         try {
@@ -37,9 +35,7 @@ class CustomerController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(StoreCustomerRequest $request): JsonResponse
     {
         try {
@@ -51,9 +47,7 @@ class CustomerController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(int $id): JsonResponse
     {
         try {
@@ -67,9 +61,7 @@ class CustomerController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(UpdateCustomerRequest $request, int $id): JsonResponse
     {
         try {
@@ -86,9 +78,7 @@ class CustomerController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy(int $id): JsonResponse
     {
         try {
