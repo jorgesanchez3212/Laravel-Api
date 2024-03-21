@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCustomerRequest;
 use App\Http\Resources\CustomerCollection;
 use App\Models\Customer;
 use App\Services\CustomerService as CustomerService;
+use Illuminate\Http\Client\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
@@ -73,7 +74,9 @@ class CustomerController extends Controller
     {
         try {
             $data = $request->validated();
+            Log::info($request);
             $customer = $this->customerService->update($data, $id);
+            Log::info($customer);
             if (!$customer) {
                 return response()->json(['message' => 'Customer not found'], 404);
             }

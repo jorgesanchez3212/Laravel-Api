@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 
 class CustomerService
 {
@@ -40,6 +41,8 @@ class CustomerService
         if (!$customer) {
             return null;
         }
+        Log::info("Soy el servicio");
+        Log::info($data);
         $customer->update($data);
         return $customer;
     }
@@ -53,6 +56,6 @@ class CustomerService
         if (!$customer) {
             return false;
         }
-        return $customer->delete();
+        return $customer->delete($id);
     }
 }
