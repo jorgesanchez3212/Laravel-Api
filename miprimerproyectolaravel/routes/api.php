@@ -30,3 +30,11 @@ Route::prefix('customers')->group(function () {
     Route::put('/{id}', [CustomerController::class, 'update']); 
     Route::delete('/{id}', [CustomerController::class, 'destroy']);
 });
+
+Route::prefix('invoices')->group(function () {
+    Route::get('/', [InvoiceController::class, 'index']); 
+    Route::post('/', [InvoiceController::class, 'store']); 
+    Route::get('/{id}', [InvoiceController::class, 'show']); 
+    Route::put('/{id}', [InvoiceController::class, 'update']); 
+    Route::delete('/{id}', [InvoiceController::class, 'destroy']);
+});

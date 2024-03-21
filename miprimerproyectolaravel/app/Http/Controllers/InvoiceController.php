@@ -20,7 +20,7 @@ class InvoiceController extends Controller
     public function __construct(InvoiceService $invoiceService)
     {
 
-        $this->$invoiceService = $invoiceService;
+        $this->invoiceService = $invoiceService;
         
     }
 
@@ -31,7 +31,7 @@ class InvoiceController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $invoices = $this->invoiceService->getAllCustomers();
+            $invoices = $this->invoiceService->getAllInvoices();
             Log::info('holahola');
 
             return response()->json($invoices);
@@ -48,10 +48,13 @@ class InvoiceController extends Controller
     public function store(StoreInvoiceRequest $request) : JsonResponse
     {
         try {
+            Log::info($request);
             $data = $request->validated();
             $invoice = $this->invoiceService->create($data);
+            Log::info($invoice);
             return response()->json($invoice, 201);
         } catch (\Exception $e) {
+            Log::info($request);
             return response()->json(['message' => 'Error creating invoice', 'error' => $e->getMessage()], 500);
         }
     }
