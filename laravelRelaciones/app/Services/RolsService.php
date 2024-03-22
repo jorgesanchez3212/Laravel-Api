@@ -21,6 +21,7 @@ class RolsService
 
     public function create(array $data): Rol
     {
+        Log::info($data);
         return Rol::create($data);
     }
 
@@ -30,8 +31,7 @@ class RolsService
         if (!$entity) {
             return null;
         }
-        Log::info("Soy el servicio");
-        Log::info($data);
+
         $entity->update($data);
         return $entity;
     }

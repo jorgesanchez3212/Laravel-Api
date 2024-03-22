@@ -22,7 +22,9 @@ class UpdatePermissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'rol_id' => '',
+            'type' => 'required|string|max:255',
+            'namePermission' => 'required|string|max:255',
         ];
     }
 }

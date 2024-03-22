@@ -22,7 +22,11 @@ class UpdateUsersRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'rol_id' => '',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'city' => 'required|string|max:255',
+            'postalCode' => 'required|string|max:20',
         ];
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class UsersService 
 {
-    public function getAllCustomers(): Collection
+    public function getAll(): Collection
     {
         return Users::all();
     }
@@ -21,7 +21,20 @@ class UsersService
 
     public function create(array $data): Users
     {
-        return Users::create($data);
+    
+    $permissionId = isset($data['permission_id']) ? $data['permission_id'] : null;
+    unset($data['permission_id']);
+    
+    $u = new Users();
+    $u->name = "jorge";
+    $u->save();
+
+
+    $user = Users::create($data);
+    if ($permissionId) {
+        $user->usersPermission()->create(['permission_id' => $permissionId]);
+    }
+    return $user;
     }
 
     public function update(array $data, int $id): ?Users
@@ -30,10 +43,17 @@ class UsersService
         if (!$entity) {
             return null;
         }
-        Log::info("Soy el servicio");
-        Log::info($data);
-        $entity->update($data);
-        return $entity;
+
+    $permissionId = isset($data['permission_id']) ? $data['permission_id'] : null;
+    unset($data['permission_id']);
+
+    Log::info($data);
+    $entity->update($data);
+    if ($permissionId) {
+        $entity->usersPermission()->update(['permission_id' => $permissionId]);
+    }
+    return $data;
+   
     }
 
 
@@ -43,6 +63,8 @@ class UsersService
         if (!$entity) {
             return false;
         }
+        $entity->usersPermission()->delete();
+
         return $entity->delete($id);
     }
 }

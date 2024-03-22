@@ -23,12 +23,8 @@ class PermissionController extends Controller
     {
         try {
             $entity = $this->entityService->getAllCustomers();
-            Log::info('holahola');
-
             return response()->json($entity);
         } catch (\Exception $e) {
-            Log::info('holahola');
-
             return response()->json(['message' => 'Error retrieving entities', 'error' => $e->getMessage()], 500);
         }
     }
@@ -37,7 +33,9 @@ class PermissionController extends Controller
     public function store(StorePermissionRequest $request): JsonResponse
     {
         try {
+            Log::info($request);
             $data = $request->validated();
+            Log::info($data);
             $entity = $this->entityService->create($data);
             return response()->json($entity, 201);
         } catch (\Exception $e) {

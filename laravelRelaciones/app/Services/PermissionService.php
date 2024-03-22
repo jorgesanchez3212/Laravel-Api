@@ -30,8 +30,6 @@ class PermissionService
         if (!$entity) {
             return null;
         }
-        Log::info("Soy el servicio");
-        Log::info($data);
         $entity->update($data);
         return $entity;
     }

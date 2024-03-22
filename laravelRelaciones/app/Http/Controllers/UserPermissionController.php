@@ -22,12 +22,9 @@ class UserPermissionController extends Controller
     {
         try {
             $entity = $this->entityService->getAllCustomers();
-            Log::info('holahola');
 
             return response()->json($entity);
         } catch (\Exception $e) {
-            Log::info('holahola');
-
             return response()->json(['message' => 'Error retrieving entities', 'error' => $e->getMessage()], 500);
         }
     }
@@ -63,9 +60,7 @@ class UserPermissionController extends Controller
     {
         try {
             $data = $request->validated();
-            Log::info($request);
             $entity = $this->entityService->update($data, $id);
-            Log::info($entity);
             if (!$entity) {
                 return response()->json(['message' => 'Entities not found'], 404);
             }
